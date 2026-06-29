@@ -55,6 +55,14 @@ export default [
             'react/react-in-jsx-scope': 'off',
             'react/prop-types': 'off',
 
+            'react/self-closing-comp': [
+                'warn',
+                {
+                    component: true,
+                    html: true,
+                },
+            ],
+
             'react-refresh/only-export-components': [
                 'warn',
                 { allowConstantExport: true },

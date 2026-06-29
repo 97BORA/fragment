@@ -1,11 +1,16 @@
 import './App.css';
 
+import SplashScreen from '@/components/SplashScreen';
+
 function App() {
     return (
         <>
-            <main>
-                <h1>Get started</h1>
-            </main>
+            <SplashScreen />
+            <div className="Test-box">
+                <div>1 section</div>
+                <div>2 section</div>
+                <div>3 section</div>
+            </div>
         </>
     );
 }
