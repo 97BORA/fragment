@@ -1,11 +1,15 @@
+import SplashScreen from '@/components/SplashScreen';
+import useSplashScreen from '@/hooks/useSplashScreen';
+
 import './App.css';
 
-import SplashScreen from '@/components/SplashScreen';
-
 function App() {
+    const { showSplashScreen, splashScreenPhase } = useSplashScreen();
+
     return (
         <>
-            <SplashScreen />
+            {showSplashScreen && <SplashScreen phase={splashScreenPhase} />}
+
             <div className="Test-box">
                 <div>1 section</div>
                 <div>2 section</div>

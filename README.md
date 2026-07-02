@@ -6,3 +6,6 @@
 2. 20260629
     - settings.json / eslint.config.js 수정
     - SplashScreen
+
+3. 20260702
+    - 렌더링 이벤트
