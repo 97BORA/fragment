@@ -1,3 +1,5 @@
+import Counter from '../untitled/counter';
+
 import SplashScreen from '@/components/SplashScreen';
 import useSplashScreen from '@/hooks/useSplashScreen';
 
@@ -15,6 +17,8 @@ function App() {
                 <div>2 section</div>
                 <div>3 section</div>
             </div>
+
+            <Counter />
         </>
     );
 }

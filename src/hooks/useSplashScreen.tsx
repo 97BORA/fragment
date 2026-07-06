@@ -4,8 +4,8 @@ export type SplashScreenPhase = 'loading' | 'intro' | 'fadeOut';
 
 const FORCE_LOADING_TEST = true;
 
-const LOADING_TEST_TIME = 3000;
-const INTRO_TIME = 5000;
+const LOADING_TEST_TIME = 1000;
+const INTRO_TIME = 1000;
 const FADE_OUT_TIME = 800;
 
 function useSplashScreen() {
