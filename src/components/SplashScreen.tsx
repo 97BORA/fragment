@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import type { SplashScreenPhase } from '@/hooks/useSplashScreen';
 
 import '@/styles/SplashScreen.css';
@@ -7,6 +9,22 @@ type SplashScreenProps = {
 };
 
 function SplashScreen({ phase }: SplashScreenProps) {
+    useEffect(() => {
+        const initialLoader = document.getElementById('initial-loader');
+
+        if (!initialLoader) return;
+
+        initialLoader.classList.add('initial-loader--hidden');
+
+        const removeTimerId = window.setTimeout(() => {
+            initialLoader.remove();
+        }, 300);
+
+        return () => {
+            window.clearTimeout(removeTimerId);
+        };
+    }, []);
+
     return (
         <section
             className={`splash-screen ${phase === 'fadeOut' ? 'fade-out' : ''}`}
