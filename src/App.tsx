@@ -1,7 +1,6 @@
-import Counter from '../untitled/counter';
-
 import SplashScreen from '@/components/SplashScreen';
 import useSplashScreen from '@/hooks/useSplashScreen';
+import SideMenu from '@/pages/sideMenu/sideMenu';
 
 import './App.css';
 
@@ -12,13 +11,13 @@ function App() {
         <>
             {showSplashScreen && <SplashScreen phase={splashScreenPhase} />}
 
-            <div className="Test-box">
-                <div>1 section</div>
-                <div>2 section</div>
-                <div>3 section</div>
-            </div>
+            <SideMenu />
 
-            <Counter />
+            <div className="home">
+                <section className="home-hero">home-hero</section>
+                <section className="home-main">home-main</section>
+                <section className="home-extra">home-extra</section>
+            </div>
         </>
     );
 }
