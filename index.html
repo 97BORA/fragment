@@ -12,12 +12,23 @@
                 display: grid;
                 place-items: center;
                 background-color: rgba(0, 0, 0, 0.9);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition:
+                    opacity 300ms ease,
+                    visibility 300ms ease;
+            }
+
+            .initial-loader--visible {
                 opacity: 1;
-                transition: opacity 300ms ease;
+                visibility: visible;
+                pointer-events: auto;
             }
 
             .initial-loader--hidden {
                 opacity: 0;
+                visibility: hidden;
                 pointer-events: none;
             }
 
@@ -69,6 +80,13 @@
             </div>
         </div>
         <div id="root"></div>
+        <script>
+            window.__initialLoaderTimer = window.setTimeout(() => {
+                document
+                    .getElementById('initial-loader')
+                    ?.classList.add('initial-loader--visible');
+            }, 150);
+        </script>
         <script type="module" src="/src/main.tsx"></script>
     </body>
 </html>

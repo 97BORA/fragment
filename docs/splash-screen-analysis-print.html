@@ -5,161 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Splash Screen Code Analysis</title>
     <style>
-        @page {
-            size: A4 portrait;
-            margin: 10mm;
-        }
-
-        :root {
-            color: #172033;
-            background: #eef1f5;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.58;
-        }
-
+        @page { size: A4 portrait; margin: 10mm; }
+        :root { color: #172033; background: #eef1f5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.58; }
         * { box-sizing: border-box; }
         body { margin: 0; }
-
-        main {
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 30px;
-        }
-
-        .sheet {
-            position: relative;
-            margin: 0 auto 18px;
-            padding: 30px 32px 30px 38px;
-            border: 1px solid #d8dee8;
-            border-radius: 8px;
-            background: #fff;
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
-        }
-
-        .sheet::before {
-            content: '';
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 5px;
-            border-radius: 8px 0 0 8px;
-            background: #334155;
-        }
-
-        .cover {
-            display: grid;
-            min-height: 390px;
-            align-content: center;
-            gap: 20px;
-        }
-
-        .cover h1 {
-            max-width: 760px;
-            margin: 0;
-            color: #0f172a;
-            font-size: 38px;
-            line-height: 1.18;
-            letter-spacing: 0;
-        }
-
-        .cover p {
-            max-width: 720px;
-            margin: 0;
-            color: #475569;
-            font-size: 16px;
-        }
-
-        .meta-grid,
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-        }
-
-        .meta-card,
-        .summary-card {
-            padding: 14px 16px;
-            border: 1px solid #dce3ee;
-            border-radius: 7px;
-            background: #f8fafc;
-        }
-
-        .meta-card strong,
-        .summary-card strong {
-            display: block;
-            margin-bottom: 4px;
-            color: #0f172a;
-            font-size: 14px;
-        }
-
-        .eyebrow {
-            margin: 0 0 7px;
-            color: #64748b;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        h1, h2, h3 {
-            color: #0f172a;
-            line-height: 1.28;
-            letter-spacing: 0;
-        }
-
-        h2 {
-            margin: 0 0 8px;
-            font-size: 23px;
-        }
-
-        h3 {
-            margin: 0 0 7px;
-            font-size: 15px;
-        }
-
+        main { max-width: 980px; margin: 0 auto; padding: 30px; }
+        .sheet { position: relative; margin: 0 auto 18px; padding: 30px 32px 30px 38px; border: 1px solid #d8dee8; border-radius: 8px; background: #fff; box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07); }
+        .sheet::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 5px; border-radius: 8px 0 0 8px; background: #334155; }
+        .cover { display: grid; min-height: 390px; align-content: center; gap: 20px; }
+        .cover h1 { max-width: 760px; margin: 0; color: #0f172a; font-size: 38px; line-height: 1.18; letter-spacing: 0; }
+        .cover p { max-width: 720px; margin: 0; color: #475569; font-size: 16px; }
+        .meta-grid, .summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .meta-card, .summary-card { padding: 14px 16px; border: 1px solid #dce3ee; border-radius: 7px; background: #f8fafc; }
+        .meta-card strong, .summary-card strong { display: block; margin-bottom: 4px; color: #0f172a; font-size: 14px; }
+        .eyebrow { margin: 0 0 7px; color: #64748b; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+        h1, h2, h3 { color: #0f172a; line-height: 1.28; letter-spacing: 0; }
+        h2 { margin: 0 0 8px; font-size: 23px; }
+        h3 { margin: 0 0 7px; font-size: 15px; }
         p { margin: 0 0 12px; }
-
-        .sheet-header {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2px;
-            margin-bottom: 12px;
-            padding: 0 0 10px;
-            border-bottom: 1px solid #dce3ee;
-        }
-
-        .sheet-header p:last-child {
-            margin: 0;
-            color: #56657a;
-            font-size: 13px;
-        }
-
-        .code-block,
-        .mini-code,
-        .sequence {
-            margin: 0;
-            border: 1px solid #d7deea;
-            border-radius: 7px;
-            background: #f7f9fc;
-            color: #111827;
-            font-family: Consolas, 'SFMono-Regular', Menlo, monospace;
-            font-variant-ligatures: none;
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
-        }
-
-        .code-block {
-            padding: 14px 16px;
-            font-size: 11.2px;
-            line-height: 1.45;
-        }
-
-        .mini-code,
-        .sequence {
-            padding: 10px 12px;
-            font-size: 11.5px;
-            line-height: 1.42;
-        }
-
+        .sheet-header { display: grid; grid-template-columns: 1fr; gap: 2px; margin-bottom: 12px; padding: 0 0 10px; border-bottom: 1px solid #dce3ee; }
+        .sheet-header p:last-child { margin: 0; color: #56657a; font-size: 13px; }
+        .code-block, .mini-code, .sequence { margin: 0; border: 1px solid #d7deea; border-radius: 7px; background: #f7f9fc; color: #111827; font-family: Consolas, 'SFMono-Regular', Menlo, monospace; font-variant-ligatures: none; white-space: pre-wrap; overflow-wrap: anywhere; }
+        .code-block { padding: 14px 16px; font-size: 11.2px; line-height: 1.45; }
+        .index-code-sheet .code-block { font-size: 10.4px; line-height: 1.34; }
+        .mini-code, .sequence { padding: 10px 12px; font-size: 11.5px; line-height: 1.42; }
         .token-comment { color: #6b7280; font-style: italic; }
         .token-string { color: #047857; }
         .token-keyword { color: #1d4ed8; font-weight: 700; }
@@ -171,215 +40,72 @@
         .token-selector { color: #0369a1; font-weight: 700; }
         .token-property { color: #7c2d12; }
         .token-atrule { color: #0f766e; font-weight: 700; }
-
-        .paired-code-grid {
-            display: grid;
-            grid-template-columns: 0.82fr 1.18fr;
-            gap: 14px;
-            min-height: 0;
-        }
-
-        .code-panel {
-            display: flex;
-            min-width: 0;
-            min-height: 0;
-            flex-direction: column;
-        }
-
-        .code-panel h3 {
-            margin: 0 0 7px;
-            font-size: 15px;
-        }
-
-        .code-panel .code-block {
-            flex: 1 1 auto;
-            min-height: 0;
-        }
-
-        .summary-card p,
-        .summary-card li {
-            color: #263244;
-            font-size: 13px;
-        }
-
-        .summary-card ul,
-        .summary-card ol {
-            margin: 8px 0 0;
-            padding-left: 19px;
-        }
-
+        .paired-code-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 14px; min-height: 0; }
+        .code-panel { display: flex; min-width: 0; min-height: 0; flex-direction: column; }
+        .code-panel h3 { margin: 0 0 7px; font-size: 15px; }
+        .code-panel .code-block { flex: 1 1 auto; min-height: 0; }
+        .summary-card p, .summary-card li { color: #263244; font-size: 13px; }
+        .summary-card ul, .summary-card ol { margin: 8px 0 0; padding-left: 19px; }
         .summary-card li { margin: 5px 0; }
         .print-tip { color: #64748b; font-size: 13px; }
-
         @media screen {
-            .print-action {
-                position: sticky;
-                top: 0;
-                z-index: 10;
-                display: flex;
-                justify-content: flex-end;
-                max-width: 980px;
-                margin: 0 auto 12px;
-                padding: 12px 0;
-                background: linear-gradient(#eef1f5 70%, rgba(238, 241, 245, 0));
-            }
-
-            .print-action button {
-                border: 1px solid #273447;
-                border-radius: 7px;
-                padding: 10px 16px;
-                background: #334155;
-                color: #fff;
-                font-weight: 700;
-                cursor: pointer;
-            }
-
+            .print-action { position: sticky; top: 0; z-index: 10; display: flex; justify-content: flex-end; max-width: 980px; margin: 0 auto 12px; padding: 12px 0; background: linear-gradient(#eef1f5 70%, rgba(238, 241, 245, 0)); }
+            .print-action button { border: 1px solid #273447; border-radius: 7px; padding: 10px 16px; background: #334155; color: #fff; font-weight: 700; cursor: pointer; }
             .print-action button:hover { background: #1f2937; }
         }
-
         @media print {
             :root { background: #fff; }
             body { color: #111827; }
-
-            main {
-                max-width: none;
-                margin: 0;
-                padding: 0;
-            }
-
+            main { max-width: none; margin: 0; padding: 0; }
             .print-action { display: none; }
-
-            .sheet {
-                width: 100%;
-                min-height: 0;
-                margin: 0;
-                padding: 0 0 0 4mm;
-                border: 0;
-                border-left: 2.5mm solid #334155;
-                border-radius: 0;
-                box-shadow: none;
-                break-after: page;
-                page-break-after: always;
-            }
-
+            .sheet { width: 100%; min-height: 0; margin: 0; padding: 0 0 0 4mm; border: 0; border-left: 2.5mm solid #334155; border-radius: 0; box-shadow: none; break-after: page; page-break-after: always; }
             .sheet::before { display: none; }
-
-            .sheet:last-child {
-                break-after: auto;
-                page-break-after: auto;
-            }
-
-            .cover {
-                min-height: 260mm;
-                padding-top: 8mm;
-                padding-bottom: 8mm;
-            }
-
+            .sheet:last-child { break-after: auto; page-break-after: auto; }
+            .cover { min-height: 260mm; padding-top: 8mm; padding-bottom: 8mm; }
             .cover h1 { font-size: 25pt; }
             .cover p { font-size: 11pt; }
-
-            .code-sheet {
-                display: flex;
-                flex-direction: column;
-                height: 277mm;
-            }
-
-            .sheet-header {
-                flex: 0 0 auto;
-                margin-bottom: 3mm;
-                padding-bottom: 2.5mm;
-            }
-
+            .code-sheet { display: flex; flex-direction: column; height: 277mm; }
+            .sheet-header { flex: 0 0 auto; margin-bottom: 3mm; padding-bottom: 2.5mm; }
             .sheet-header h2 { font-size: 14.2pt; }
             .sheet-header p:last-child { font-size: 8.8pt; }
             .eyebrow { margin-bottom: 1.2mm; font-size: 7.5pt; }
-
-            .code-block {
-                flex: 1 1 auto;
-                min-height: 0;
-                padding: 3.1mm;
-                border-radius: 0;
-                font-size: 7pt;
-                line-height: 1.13;
-                overflow: hidden;
-            }
-
+            .code-block { flex: 1 1 auto; min-height: 0; padding: 3.1mm; border-radius: 0; font-size: 7pt; line-height: 1.13; overflow: hidden; }
+            .index-code-sheet .code-block { padding: 2.5mm; font-size: 6.15pt; line-height: 1.07; }
             .paired-code-sheet .sheet-header { margin-bottom: 2.5mm; }
-
-            .paired-code-grid {
-                flex: 1 1 auto;
-                gap: 5mm;
-                min-height: 0;
-            }
-
-            .paired-code-grid .code-panel h3 {
-                flex: 0 0 auto;
-                margin-bottom: 2mm;
-                font-size: 10pt;
-            }
-
-            .paired-code-grid .code-block {
-                font-size: 6.8pt;
-                line-height: 1.12;
-            }
-
+            .paired-code-grid { flex: 1 1 auto; gap: 5mm; min-height: 0; }
+            .paired-code-grid .code-panel h3 { flex: 0 0 auto; margin-bottom: 2mm; font-size: 10pt; }
+            .paired-code-grid .code-block { font-size: 6.8pt; line-height: 1.12; }
             .summary-sheet { min-height: 277mm; }
             .summary-sheet h2 { font-size: 15.5pt; }
             .summary-sheet h3 { font-size: 10.6pt; }
-            .summary-sheet p,
-            .summary-sheet li { font-size: 9pt; }
-
-            .summary-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 4mm;
-                margin-top: 4mm;
-            }
-
-            .summary-card,
-            .meta-card {
-                padding: 3.2mm;
-                border-color: #d7dce5;
-                border-radius: 0;
-                background: #fbfcfe;
-                break-inside: avoid;
-            }
-
+            .summary-sheet p, .summary-sheet li { font-size: 9pt; }
+            .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4mm; margin-top: 4mm; }
+            .summary-card, .meta-card { padding: 3.2mm; border-color: #d7dce5; border-radius: 0; background: #fbfcfe; break-inside: avoid; }
             .summary-card strong { font-size: 9.8pt; }
-            .summary-card ul,
-            .summary-card ol { padding-left: 5mm; }
+            .summary-card ul, .summary-card ol { padding-left: 5mm; }
             .summary-card li { margin: 1.5mm 0; }
-
-            .mini-code,
-            .sequence {
-                padding: 2.6mm;
-                font-size: 7.4pt;
-                line-height: 1.2;
-            }
+            .mini-code, .sequence { padding: 2.6mm; font-size: 7.4pt; line-height: 1.2; }
         }
     </style>
 </head>
 <body>
     <main>
-        <div class="print-action">
-            <button type="button" onclick="window.print()">인쇄하기</button>
-        </div>
-
+        <div class="print-action"><button type="button" onclick="window.print()">인쇄하기</button></div>
         <section class="sheet cover">
             <p class="eyebrow">Fragment Study Note</p>
             <h1>Splash Screen 코드 해석 자료</h1>
-            <p>초기 HTML 로더와 React SplashScreen이 어떻게 이어지는지 코드 원문과 해석을 함께 정리한 프린트용 문서입니다.</p>
+            <p>150ms 지연 initial-loader와 React SplashScreen이 어떻게 이어지는지 코드 원문과 해석을 함께 정리한 프린트용 문서입니다.</p>
             <div class="meta-grid">
-                <div class="meta-card"><strong>구성</strong>코드 원문 + 실행 흐름 + 핵심 개념</div>
+                <div class="meta-card"><strong>구성</strong>최신 코드 원문 + 실행 흐름 + 핵심 개념</div>
                 <div class="meta-card"><strong>인쇄 기준</strong>A4 세로, 짧은 파일은 한 페이지에 묶음</div>
             </div>
             <p class="print-tip">브라우저 인쇄 설정은 A4, 세로 방향, 여백 기본값, 배율 기본값을 권장합니다.</p>
         </section>
-
-        <section class="sheet code-sheet">
+        <section class="sheet code-sheet index-code-sheet">
             <header class="sheet-header">
                 <p class="eyebrow">Code</p>
                 <h2>index.html</h2>
-                <p>React가 실행되기 전 initial-loader를 먼저 보여주는 HTML 진입점입니다.</p>
+                <p>초기 HTML 로더를 숨김 상태로 두고, React 시작이 150ms보다 늦을 때만 표시합니다.</p>
             </header>
             <pre class="code-block"><code data-lang="html">&lt;!doctype html&gt;
 &lt;html lang=&quot;ko&quot;&gt;
@@ -395,12 +121,23 @@
                 display: grid;
                 place-items: center;
                 background-color: rgba(0, 0, 0, 0.9);
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition:
+                    opacity 300ms ease,
+                    visibility 300ms ease;
+            }
+
+            .initial-loader--visible {
                 opacity: 1;
-                transition: opacity 300ms ease;
+                visibility: visible;
+                pointer-events: auto;
             }
 
             .initial-loader--hidden {
                 opacity: 0;
+                visibility: hidden;
                 pointer-events: none;
             }
 
@@ -452,12 +189,18 @@
             &lt;/div&gt;
         &lt;/div&gt;
         &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
+        &lt;script&gt;
+            window.__initialLoaderTimer = window.setTimeout(() =&gt; {
+                document
+                    .getElementById(&#39;initial-loader&#39;)
+                    ?.classList.add(&#39;initial-loader--visible&#39;);
+            }, 150);
+        &lt;/script&gt;
         &lt;script type=&quot;module&quot; src=&quot;/src/main.tsx&quot;&gt;&lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
         </section>
-
         <section class="sheet code-sheet paired-code-sheet">
             <header class="sheet-header">
                 <p class="eyebrow">Code</p>
@@ -511,7 +254,6 @@ export default App;
                 </article>
             </div>
         </section>
-
         <section class="sheet code-sheet">
             <header class="sheet-header">
                 <p class="eyebrow">Code</p>
@@ -595,12 +337,11 @@ function useSplashScreen() {
 export default useSplashScreen;
 </code></pre>
         </section>
-
         <section class="sheet code-sheet">
             <header class="sheet-header">
                 <p class="eyebrow">Code</p>
                 <h2>src/components/SplashScreen.tsx</h2>
-                <p>phase 값에 따라 실제 스플래시 UI를 렌더링하는 컴포넌트입니다.</p>
+                <p>React가 시작되면 HTML 로더 표시 타이머를 취소하고, initial-loader를 숨긴 뒤 제거합니다.</p>
             </header>
             <pre class="code-block"><code data-lang="tsx">import { useEffect } from &#39;react&#39;;
 
@@ -608,12 +349,20 @@ import type { SplashScreenPhase } from &#39;@/hooks/useSplashScreen&#39;;
 
 import &#39;@/styles/SplashScreen.css&#39;;
 
+declare global {
+    interface Window {
+        __initialLoaderTimer?: number;
+    }
+}
+
 type SplashScreenProps = {
     phase: SplashScreenPhase;
 };
 
 function SplashScreen({ phase }: SplashScreenProps) {
     useEffect(() =&gt; {
+        window.clearTimeout(window.__initialLoaderTimer);
+
         const initialLoader = document.getElementById(&#39;initial-loader&#39;);
 
         if (!initialLoader) return;
@@ -651,12 +400,11 @@ function SplashScreen({ phase }: SplashScreenProps) {
 export default SplashScreen;
 </code></pre>
         </section>
-
         <section class="sheet code-sheet">
             <header class="sheet-header">
                 <p class="eyebrow">Code</p>
                 <h2>src/styles/SplashScreen.css</h2>
-                <p>스플래시 화면을 화면 전체에 덮고 fade-out 애니메이션을 적용합니다.</p>
+                <p>React SplashScreen을 화면 전체에 덮고 fade-out 애니메이션을 적용합니다.</p>
             </header>
             <pre class="code-block"><code data-lang="css">/* splash-screen */
 
@@ -734,7 +482,6 @@ export default SplashScreen;
 }
 </code></pre>
         </section>
-
         <section class="sheet summary-sheet">
             <p class="eyebrow">Analysis</p>
             <h2>해석 / 분석 요약</h2>
@@ -742,47 +489,43 @@ export default SplashScreen;
                 <article class="summary-card">
                     <strong>전체 흐름</strong>
                     <ol>
-                        <li>index.html이 먼저 로드되고 initial-loader가 화면을 덮습니다.</li>
+                        <li>index.html이 먼저 로드되고 initial-loader는 숨김 상태로 존재합니다.</li>
+                        <li>150ms 타이머가 시작되고, 시간이 지나면 initial-loader--visible이 붙습니다.</li>
                         <li>main.tsx가 React 앱을 #root에 렌더링합니다.</li>
                         <li>App.tsx가 useSplashScreen을 실행하고 SplashScreen을 보여줍니다.</li>
-                        <li>useSplashScreen이 loading → intro → fadeOut 순서로 phase를 바꿉니다.</li>
-                        <li>SplashScreen이 initial-loader를 숨기고 제거합니다.</li>
+                        <li>SplashScreen이 타이머를 취소하고 initial-loader를 숨긴 뒤 제거합니다.</li>
                     </ol>
                 </article>
-
                 <article class="summary-card">
                     <strong>핵심 개념</strong>
                     <ul>
                         <li>document.readyState는 브라우저 문서 로딩 상태입니다.</li>
                         <li>splashScreenPhase는 직접 만든 React state입니다.</li>
-                        <li>FORCE_LOADING_TEST는 로딩 화면 확인용 테스트 설정입니다.</li>
-                        <li>setTimeout은 일정 시간 뒤 다음 phase로 넘깁니다.</li>
+                        <li>__initialLoaderTimer는 HTML 로더 표시를 지연시키는 타이머입니다.</li>
+                        <li>setTimeout은 일정 시간 뒤 다음 동작을 실행합니다.</li>
                         <li>cleanup 함수는 타이머와 이벤트 리스너를 정리합니다.</li>
                     </ul>
                 </article>
-
                 <article class="summary-card">
-                    <strong>초기 HTML 로더와 React SplashScreen</strong>
-                    <p>initial-loader는 React 실행 전 빈 화면을 막습니다. React SplashScreen은 앱 실행 후 loading, intro, fadeOut 상태를 제어합니다.</p>
-                    <pre class="sequence"><code>index.html
-→ initial-loader
-→ main.tsx
-→ App
-→ SplashScreen
-→ loading
-→ intro
-→ fadeOut
-→ 제거</code></pre>
-                </article>
+                    <strong>빠른 로딩과 느린 로딩</strong>
+                    <p>React가 150ms 안에 시작되면 initial-loader는 보이지 않습니다. React 시작이 늦으면 initial-loader가 보이고, React SplashScreen이 시작된 뒤 제거됩니다.</p>
+                    <pre class="sequence"><code>빠른 로딩
+→ 타이머 취소
+→ HTML 로더 안 보임
 
+느린 로딩
+→ 150ms 뒤 표시
+→ React 시작
+→ 숨김 및 제거</code></pre>
+                </article>
                 <article class="summary-card">
                     <strong>주의할 점</strong>
                     <ul>
                         <li>readyState 자체가 화면을 덮는 것은 아닙니다.</li>
                         <li>화면을 덮는 것은 CSS의 fixed, inset, z-index입니다.</li>
                         <li>FORCE_LOADING_TEST는 배포할 때 false가 자연스럽습니다.</li>
-                        <li>두 로더의 배경색과 크기가 비슷해야 깜빡임이 줄어듭니다.</li>
-                        <li>코드가 길어지면 파일별 코드와 요약을 분리하는 것이 좋습니다.</li>
+                        <li>지연 로더는 불필요한 깜빡임을 줄이기 위한 장치입니다.</li>
+                        <li>150ms는 상황에 따라 100~200ms 사이에서 조정할 수 있습니다.</li>
                     </ul>
                 </article>
             </div>
@@ -791,73 +534,57 @@ export default SplashScreen;
     <script>
         (() => {
             const escapeHtml = (value) =>
-                value
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;');
+                value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-            const stash = (html, pattern, className) => {
-                const tokens = [];
-                const next = html.replace(pattern, (match) => {
-                    const marker = `@@${className}_${tokens.length}@@`;
-                    tokens.push([
-                        marker,
-                        `<span class="${className}">${match}</span>`,
-                    ]);
-                    return marker;
+            const wrap = (className, value) =>
+                '<span class="' + className + '">' + value + '</span>';
+
+            const highlightWithRules = (source, rules) => {
+                const html = escapeHtml(source);
+                const pattern = new RegExp(rules.map((rule) => '(' + rule.pattern.source + ')').join('|'), 'g');
+
+                return html.replace(pattern, (...args) => {
+                    const match = args[0];
+                    const groups = args.slice(1, rules.length + 1);
+                    const ruleIndex = groups.findIndex((group) => group !== undefined);
+                    const rule = rules[ruleIndex];
+
+                    return rule.render ? rule.render(match) : wrap(rule.className, match);
                 });
-
-                return { html: next, tokens };
             };
 
-            const restore = (html, groups) => {
-                let output = html;
-                groups.flat().forEach(([marker, token]) => {
-                    output = output.split(marker).join(token);
-                });
-                return output;
-            };
+            const highlightTsx = (source) =>
+                highlightWithRules(source, [
+                    { pattern: /\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, className: 'token-comment' },
+                    { pattern: /`(?:\\.|[^`])*`|'(?:\\.|[^'])*'|"(?:\\.|[^"])*"/g, className: 'token-string' },
+                    { pattern: /\b(?:import|from|export|type|const|function|return|if|true|false|null|undefined|interface|declare|global)\b/g, className: 'token-keyword' },
+                    { pattern: /\b(?:SplashScreenPhase|SplashScreenProps|StrictMode|Window)\b/g, className: 'token-type' },
+                    { pattern: /\b[A-Za-z_$][\w$]*(?=\()/g, className: 'token-function' },
+                    { pattern: /\b\d+\b/g, className: 'token-number' },
+                ]);
 
-            const highlightTsx = (source) => {
-                let html = escapeHtml(source);
-                const comments = stash(html, /\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, 'token-comment');
-                html = comments.html;
-                const strings = stash(html, /`(?:\\.|[^`])*`|'(?:\\.|[^'])*'|"(?:\\.|[^"])*"/g, 'token-string');
-                html = strings.html;
-                html = html.replace(/\b(import|from|export|type|const|function|return|if|true|false|null|undefined)\b/g, '<span class="token-keyword">$1</span>');
-                html = html.replace(/\b(SplashScreenPhase|SplashScreenProps|StrictMode)\b/g, '<span class="token-type">$1</span>');
-                html = html.replace(/\b([A-Za-z_$][\w$]*)(?=\()/g, '<span class="token-function">$1</span>');
-                html = html.replace(/\b(\d+)\b/g, '<span class="token-number">$1</span>');
-                return restore(html, [comments.tokens, strings.tokens]);
-            };
+            const highlightHtml = (source) =>
+                highlightWithRules(source, [
+                    { pattern: /&lt;!--[\s\S]*?--&gt;/g, className: 'token-comment' },
+                    { pattern: /"(?:\\.|[^"])*"|'(?:\\.|[^'])*'/g, className: 'token-string' },
+                    { pattern: /&lt;\/?[A-Za-z][\w:-]*/g, render: (match) => match.replace(/([A-Za-z][\w:-]*)$/, wrap('token-tag', '$1')) },
+                    { pattern: /\s[A-Za-z_:][-A-Za-z0-9_:.]*(?==)/g, render: (match) => ' ' + wrap('token-attr', match.trim()) },
+                ]);
 
-            const highlightHtml = (source) => {
-                let html = escapeHtml(source);
-                const comments = stash(html, /&lt;!--[\s\S]*?--&gt;/g, 'token-comment');
-                html = comments.html;
-                const strings = stash(html, /"(?:\\.|[^"])*"|'(?:\\.|[^'])*'/g, 'token-string');
-                html = strings.html;
-                html = html.replace(/(&lt;\/?)([A-Za-z][\w:-]*)/g, '$1<span class="token-tag">$2</span>');
-                html = html.replace(/(\s)([A-Za-z_:][-A-Za-z0-9_:.]*)(?==)/g, '$1<span class="token-attr">$2</span>');
-                return restore(html, [comments.tokens, strings.tokens]);
-            };
-
-            const highlightCss = (source) => {
-                let html = escapeHtml(source);
-                const comments = stash(html, /\/\*[\s\S]*?\*\//g, 'token-comment');
-                html = comments.html;
-                const strings = stash(html, /"(?:\\.|[^"])*"|'(?:\\.|[^'])*'/g, 'token-string');
-                html = strings.html;
-                html = html.replace(/(@[\w-]+)/g, '<span class="token-atrule">$1</span>');
-                html = html.replace(/(^|\n)(\s*)([.#]?[A-Za-z][^{\n]+)(?=\s*\{)/g, '$1$2<span class="token-selector">$3</span>');
-                html = html.replace(/([A-Za-z-]+)(?=\s*:)/g, '<span class="token-property">$1</span>');
-                html = html.replace(/\b(\d+(?:\.\d+)?(?:px|vw|vh|ms|s|%)?)\b/g, '<span class="token-number">$1</span>');
-                return restore(html, [comments.tokens, strings.tokens]);
-            };
+            const highlightCss = (source) =>
+                highlightWithRules(source, [
+                    { pattern: /\/\*[\s\S]*?\*\//g, className: 'token-comment' },
+                    { pattern: /"(?:\\.|[^"])*"|'(?:\\.|[^'])*'/g, className: 'token-string' },
+                    { pattern: /@[\w-]+/g, className: 'token-atrule' },
+                    { pattern: /(?:^|\n)\s*[.#]?[A-Za-z][^{\n]+(?=\s*\{)/g, className: 'token-selector' },
+                    { pattern: /[A-Za-z-]+(?=\s*:)/g, className: 'token-property' },
+                    { pattern: /\b\d+(?:\.\d+)?(?:px|vw|vh|ms|s|%)?\b/g, className: 'token-number' },
+                ]);
 
             document.querySelectorAll('pre code[data-lang]').forEach((node) => {
                 const source = node.textContent;
                 const lang = node.dataset.lang;
+
                 if (lang === 'html') node.innerHTML = highlightHtml(source);
                 if (lang === 'tsx') node.innerHTML = highlightTsx(source);
                 if (lang === 'css') node.innerHTML = highlightCss(source);
@@ -866,4 +593,7 @@ export default SplashScreen;
     </script>
 </body>
 </html>
+
+
+
 
