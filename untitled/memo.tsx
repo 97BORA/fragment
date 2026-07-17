@@ -12,6 +12,8 @@ function Counter() {
             // setCount = 값 또는 함수가 들어가는 공간.
             // 화살표 함수를 적용, 매개변수는 currentCount
             // currentCount 는 useState  의 count 값을 받는다.
+
+            // currentCount는 React가 setCount 함수 안으로 넣어주는 현재 count 상태값이다.
             if (currentCount >= 7) return 7;
             // if = 조건문
 
